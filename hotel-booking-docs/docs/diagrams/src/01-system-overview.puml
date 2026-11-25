@@ -1,0 +1,54 @@
+@startuml 01-system-overview
+!include _style.puml
+title Hotel Booking System — общая диаграмма вариантов использования (MVP)
+
+actor "Посетитель\n(не авторизован)" as Visitor
+actor "Гость\n(client)" as Guest
+actor "Менеджер отеля\n(manager)" as Manager
+actor "Администратор\n(admin)" as Admin
+
+rectangle "Hotel Booking System" {
+  usecase "Регистрация" as UC_Reg
+  usecase "Вход / выход" as UC_Auth
+
+  usecase "Поиск отелей\nи просмотр каталога" as UC_Search
+  usecase "Бронирование номера" as UC_Book
+  usecase "Отмена брони" as UC_Cancel
+  usecase "Оставить отзыв" as UC_Review
+
+  usecase "Управление бронями" as UC_MBook
+  usecase "Управление отелями\nи номерами" as UC_MCat
+  usecase "Отчёты и загрузка" as UC_MRep
+
+  usecase "Управление\nпользователями" as UC_AUsers
+  usecase "Администрирование данных" as UC_AData
+  usecase "Настройки и бэкап" as UC_ASys
+}
+
+Visitor -- UC_Reg
+Visitor -- UC_Auth
+
+Guest -- UC_Auth
+Guest -- UC_Search
+Guest -- UC_Book
+Guest -- UC_Cancel
+Guest -- UC_Review
+
+Manager -- UC_Auth
+Manager -- UC_MBook
+Manager -- UC_MCat
+Manager -- UC_MRep
+
+Admin -- UC_Auth
+Admin -- UC_AUsers
+Admin -- UC_AData
+Admin -- UC_ASys
+
+UC_Book ..> UC_Search : <<include>>
+
+note bottom of Admin
+  Доступ администратора к /manager
+  в документации не определён
+  (TC-011) — на диаграмме не показан.
+end note
+@enduml

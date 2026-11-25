@@ -1,0 +1,22 @@
+left to right direction
+skinparam defaultFontName DejaVu Sans
+skinparam shadowing false
+skinparam dpi 130
+skinparam packageStyle rectangle
+skinparam roundCorner 12
+skinparam ArrowColor #546E7A
+skinparam ActorBorderColor #37474F
+skinparam ActorBackgroundColor #ECEFF1
+skinparam usecase {
+  BackgroundColor #E3F2FD
+  BorderColor #1976D2
+  FontSize 12
+}
+skinparam rectangle {
+  BackgroundColor #FAFAFA
+  BorderColor #90A4AE
+}
+skinparam note {
+  BackgroundColor #FFF8E1
+  BorderColor #FFB300
+}

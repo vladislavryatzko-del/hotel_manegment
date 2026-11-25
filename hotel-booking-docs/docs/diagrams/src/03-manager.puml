@@ -1,0 +1,41 @@
+@startuml 03-manager
+!include _style.puml
+title Менеджер отеля (manager) — варианты использования
+
+actor "Менеджер отеля\n(manager)" as Manager
+
+rectangle "Панель менеджера  /manager" {
+  usecase "Просмотреть брони" as M1
+  usecase "Изменить статус брони\n(US-008)" as M2
+  usecase "Удалить бронь" as M3
+
+  usecase "Управлять отелями\n(CRUD, US-010)" as M4
+  usecase "Управлять номерами\n(CRUD, US-010)" as M5
+
+  usecase "Просмотреть клиентов" as M6
+  usecase "Просмотреть платежи" as M7
+  usecase "Сформировать отчёты" as M8
+  usecase "Просмотреть загрузку\nотелей (US-009)" as M9
+  usecase "Просмотреть загрузку\nконкретного отеля" as M10
+
+  usecase "Редактировать профиль" as M11
+}
+
+Manager -- M1
+Manager -- M4
+Manager -- M5
+Manager -- M6
+Manager -- M7
+Manager -- M8
+Manager -- M9
+Manager -- M11
+
+M2 ..> M1 : <<extend>>
+M3 ..> M1 : <<extend>>
+M10 ..> M9 : <<extend>>
+
+note right of Manager
+  Все функции требуют входа с ролью manager.
+  Гость в /manager не попадает (AC-007).
+end note
+@enduml

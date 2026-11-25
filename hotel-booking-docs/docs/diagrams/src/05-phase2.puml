@@ -1,0 +1,33 @@
+@startuml 05-phase2
+!include _style.puml
+title Целевое состояние (Phase 2) — оплата, уведомления, REST API
+
+actor "Гость\n(client)" as Guest
+actor "Менеджер отеля\n(manager)" as Manager
+actor "Внешний клиент API" as Api
+actor "Платёжный провайдер\n<<внешняя система>>" as Pay
+actor "Email / SMS-сервис\n<<внешняя система>>" as Notify
+
+rectangle "Hotel Booking System (Phase 2)" {
+  usecase "Забронировать номер" as P1
+  usecase "Оплатить бронь\n(hosted checkout)" as P2
+  usecase "Принять webhook оплаты\nи сверить статус" as P3
+  usecase "Изменить статус брони" as P4
+  usecase "Отправить уведомление\nо статусе брони" as P5
+  usecase "Работать с бронями\nчерез /api/v1" as P6
+  usecase "Аутентифицировать\nAPI-клиента" as P7
+}
+
+Guest -- P1
+Guest -- P2
+Manager -- P4
+Api -- P6
+P2 -- Pay
+P5 -- Notify
+
+P2 ..> P1 : <<extend>>
+P2 ..> P3 : <<include>>
+P1 ..> P5 : <<include>>
+P4 ..> P5 : <<include>>
+P6 ..> P7 : <<include>>
+@enduml

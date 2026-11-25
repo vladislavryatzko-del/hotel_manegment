@@ -1,0 +1,54 @@
+@startuml 02-guest
+!include _style.puml
+title Гость (client) — варианты использования
+
+actor "Посетитель\n(не авторизован)" as Visitor
+actor "Гость\n(client)" as Guest
+
+rectangle "Регистрация и доступ" {
+  usecase "Зарегистрироваться\n(US-001)" as UC1
+  usecase "Создать профиль клиента" as UC1a
+  usecase "Войти в систему\n(US-002)" as UC2
+  usecase "Выйти из системы\n(US-002)" as UC3
+}
+
+rectangle "Каталог и поиск" {
+  usecase "Просмотреть главную\nи популярные отели" as UC4
+  usecase "Найти отели по городу,\nдатам и числу гостей\n(US-003)" as UC5
+  usecase "Проверить доступность\nномеров" as UC6
+  usecase "Просмотреть карточку отеля,\nномера и цены\n(US-004)" as UC7
+}
+
+rectangle "Бронирование" {
+  usecase "Забронировать номер\n(US-005)" as UC8
+  usecase "Рассчитать стоимость\nпроживания" as UC9
+  usecase "Просмотреть «Мои бронирования»" as UC10
+  usecase "Отменить бронь\n(US-006)" as UC11
+  usecase "Оставить отзыв\n(US-007)" as UC12
+}
+
+Visitor -- UC1
+Visitor -- UC2
+Visitor -- UC4
+
+Guest -- UC2
+Guest -- UC3
+Guest -- UC4
+Guest -- UC5
+Guest -- UC7
+Guest -- UC8
+Guest -- UC10
+Guest -- UC11
+Guest -- UC12
+
+UC1 ..> UC1a : <<include>>
+UC5 ..> UC6 : <<include>>
+UC7 ..> UC6 : <<include>>
+UC8 ..> UC9 : <<include>>
+UC8 ..> UC7 : <<include>>
+UC11 ..> UC10 : <<extend>>
+UC12 ..> UC10 : <<extend>>
+
+
+
+@enduml

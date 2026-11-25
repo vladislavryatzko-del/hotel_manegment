@@ -1,0 +1,47 @@
+@startuml 04-admin
+!include _style.puml
+title Администратор (admin) — варианты использования
+
+actor "Администратор\n(admin)" as Admin
+
+rectangle "Административная панель  /admin" {
+  usecase "Просмотреть пользователей" as A1
+  usecase "Создать пользователя\nс ролью (US-011)" as A2
+  usecase "Редактировать\nпользователя" as A3
+  usecase "Удалить пользователя" as A4
+
+  usecase "Просмотреть клиентов" as A5
+  usecase "Редактировать / удалить\nклиента" as A6
+
+  usecase "Просмотреть брони\nи удалить бронь" as A7
+  usecase "Просмотреть платежи\nи удалить платёж" as A8
+  usecase "Просмотреть отзывы\nи удалить отзыв" as A9
+  usecase "Просмотреть отели" as A10
+  usecase "Просмотреть отчёты\nи статистику (US-012)" as A11
+
+  usecase "Просмотреть настройки" as A12
+  usecase "Просмотреть информацию\nо системе" as A13
+  usecase "Создать бэкап данных" as A14
+}
+
+Admin -- A1
+Admin -- A5
+Admin -- A7
+Admin -- A8
+Admin -- A9
+Admin -- A10
+Admin -- A11
+Admin -- A12
+Admin -- A13
+Admin -- A14
+
+A2 ..> A1 : <<extend>>
+A3 ..> A1 : <<extend>>
+A4 ..> A1 : <<extend>>
+A6 ..> A5 : <<extend>>
+
+note right of Admin
+  Все функции требуют входа с ролью admin.
+  Менеджер в /admin не попадает (AC-007).
+end note
+@enduml
